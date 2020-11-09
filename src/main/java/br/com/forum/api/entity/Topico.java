@@ -22,6 +22,7 @@ public class Topico {
 	
 	private String titulo;
 	private String mensagem;
+	
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 	
 	@Enumerated(EnumType.STRING)
