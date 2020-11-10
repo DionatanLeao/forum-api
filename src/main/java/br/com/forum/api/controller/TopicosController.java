@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
@@ -53,10 +54,10 @@ public class TopicosController {
 	}
 
 	@GetMapping
+	@Cacheable(value="listaTopicos")
 	public Page<TopicoDto> listar(@RequestParam(required = false) String nomeCurso, 
 								  @PageableDefault(page = 0, size = 10, sort = "id", direction = Direction.DESC) 
 								  Pageable paginacao) {
-		
 		
 		if (nomeCurso == null) {
 			Page<Topico> topicos = topicoRepository.findAll(paginacao);
@@ -91,7 +92,7 @@ public class TopicosController {
 
 	@DeleteMapping("/{id}")
 	@Transactional
-	public ResponseEntity<?> delete(@PathVariable Long id) {
+	public ResponseEntity<?> deletar(@PathVariable Long id) {
 		Optional<Topico> optional = topicoRepository.findById(id);
 		if (optional.isPresent()) {
 			topicoRepository.deleteById(id);
