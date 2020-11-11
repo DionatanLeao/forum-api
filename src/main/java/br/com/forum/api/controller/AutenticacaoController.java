@@ -17,7 +17,6 @@ import br.com.forum.api.controller.dto.TokenDto;
 import br.com.forum.api.controller.form.LoginForm;
 import br.com.forum.api.security.TokenService;
 
-
 @RestController
 @RequestMapping("/auth")
 public class AutenticacaoController {
@@ -42,4 +41,3 @@ public class AutenticacaoController {
 	}
 	
 }
-
