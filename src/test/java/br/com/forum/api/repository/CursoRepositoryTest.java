@@ -17,7 +17,7 @@ import br.com.forum.api.entity.Curso;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 public class CursoRepositoryTest {
-	
+
 	@Autowired
 	private CursoRepository repository;
 	
@@ -25,12 +25,12 @@ public class CursoRepositoryTest {
 	private TestEntityManager em;
 
 	@Test
-	public void carregarCursoNome() {	
+	public void deveriaCarregarUmCursoAoBuscarPeloSeuNome() {
 		String nomeCurso = "HTML 5";
 		
 		Curso html5 = new Curso();
 		html5.setNome(nomeCurso);
-		html5.setCategoria("Programação");
+		html5.setCategoria("Programacao");
 		em.persist(html5);
 		
 		Curso curso = repository.findByNome(nomeCurso);
@@ -39,10 +39,10 @@ public class CursoRepositoryTest {
 	}
 	
 	@Test
-	public void naoCarregarCursoNome() {	
+	public void naoDeveriaCarregarUmCursoCujoNomeNaoEstejaCadastrado() {
 		String nomeCurso = "JPA";
 		Curso curso = repository.findByNome(nomeCurso);
-		Assert.assertNotNull(curso);
+		Assert.assertNull(curso);
 	}
 
 }
